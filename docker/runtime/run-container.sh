@@ -7,6 +7,15 @@ if [ -z ${IOT_DEVICE_CONNSTR} ]; then
     exit
 fi
 
+if [ -z ${NetworkId} ]; then 
+    echo "NetworkId environment variable not set, using default of 'azure-iot-edge'"
+    echo "If you wish to use a custom docker network for this deployment use:"
+    echo "export NetworkId=other-network-id"
+    NetworkId=azure-iot-edge
+fi
+
+echo "Using Docker network id of: $NetworkId"
+
 docker run \
     -i \
     -t \
@@ -17,4 +26,5 @@ docker run \
     --network bridge \
     --name iotedgec \
     -e IOT_DEVICE_CONNSTR="$IOT_DEVICE_CONNSTR" \
+    -e NetworkId="$NetworkId" \
     iot-edge-c

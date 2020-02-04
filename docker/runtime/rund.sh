@@ -30,7 +30,7 @@ listen:
 homedir: "/var/lib/iotedge"
 moby_runtime:
   docker_uri: "/var/run/docker.sock"
-  network: "azure-iot-edge"
+  network: "$NetworkId"
 EOF
 
 cat /etc/iotedge/config.yaml
